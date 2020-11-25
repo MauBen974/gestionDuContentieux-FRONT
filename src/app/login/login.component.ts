@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       if (this.utilisateur != null) {
         localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
         localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['utilisateur']);
       }
       else {
         this.router.navigate(['login']);

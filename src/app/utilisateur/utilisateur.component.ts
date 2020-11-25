@@ -27,6 +27,15 @@ export class UtilisateurComponent implements OnInit {
       }
     })
     */
+    this.utilisateurService.findById(parseInt(localStorage.getItem('id'))).subscribe(data => {
+    this.utilisateur = data;
+    if (this.utilisateur.role=="admin") {
+      this.adminOrnot=true;
+    }
+    else {
+      this.adminOrnot=false;
+    }
+  })
     this.findAll();
   }
 
@@ -55,17 +64,19 @@ export class UtilisateurComponent implements OnInit {
   //SAVE
   save(){
     this.utilisateurService.save(this.utilisateur).subscribe(()=>{
-      this.findAll;
+      this.findAll();
       this.utilisateur = new Utilisateur();
     })
   }
   archiveUtilisateur(utilisateur){
     this.utilisateurService.archiveUtilisateur(utilisateur.idUtilisateur).subscribe(data=>{this.utilisateur=data});
+    this.findAll();
   }
 
   //DELETE
   delete(utilisateur) {
     this.utilisateurService.delete(utilisateur.idUtilisateur).subscribe(()=>this.findAll);
+    this.findAll();
   }
 
 }
