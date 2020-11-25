@@ -26,6 +26,17 @@ export class LoginComponent implements OnInit {
     this.utilisateurService.authentification(this.email, this.password).subscribe(data =>{
       this.utilisateur=data;
       if (this.utilisateur != null) {
+        localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
+        localStorage.setItem('id', this.utilisateur.idUtilisateur.toString()); 
+      }
+      this.router.navigate(['dashboard']);
+    })
+  }
+  /*
+  authentification() {
+    this.utilisateurService.authentification(this.email, this.password).subscribe(data =>{
+      this.utilisateur=data;
+      if (this.utilisateur != null) {
         if (this.utilisateur.role == "admin") {
           //localStorage.setItem('role', 'admin');
           localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
@@ -39,5 +50,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['dashboard']);
     })
   }
-
+  */
 }
