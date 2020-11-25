@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from 'app/model/utilisateur';
 import { UtilisateurService } from 'app/service/utilisateur.service';
+import { admin } from 'googleapis/build/src/apis/admin';
 
 @Component({
   selector: 'app-utilisateur',
@@ -10,9 +11,21 @@ import { UtilisateurService } from 'app/service/utilisateur.service';
 export class UtilisateurComponent implements OnInit {
   utilisateur:Utilisateur=new Utilisateur;
   utilisateurs:Utilisateur[];
+  adminOrnot:boolean;
+
   constructor(private utilisateurService : UtilisateurService) { }
 
   ngOnInit() {
+    this.utilisateurService.findById(parseInt(localStorage.getItem('id'))).subscribe(data => {
+      this.utilisateur = data;
+      if (this.utilisateur.role=="admin") {
+        this.adminOrnot=true;
+      }
+      else {
+        this.adminOrnot=false;
+      }
+    })
+    this.findAll;
   }
 
   //FIND ALL
@@ -36,6 +49,7 @@ export class UtilisateurComponent implements OnInit {
     this.utilisateurService.findOneIfArchiveFalse(utilisateur.idUtilisateur).subscribe(data=>{this.utilisateur=data});
   }
   */
+
   //SAVE
   save(){
     this.utilisateurService.save(this.utilisateur).subscribe(()=>{

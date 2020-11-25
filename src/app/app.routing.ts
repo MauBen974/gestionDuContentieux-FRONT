@@ -48,8 +48,8 @@ const routes: Routes =[
         component: TribunalComponent
       },
       {
-      path: 'register',
-      component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent
       },
       {
         path: 'login',
