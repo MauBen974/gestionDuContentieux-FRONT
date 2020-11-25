@@ -10,6 +10,8 @@ import { TribunalComponent } from './tribunal/tribunal.component';
 import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AffaireComponent } from './affaire/affaire.component';
+import { DocumentComponent } from './document/document.component';
 
 const routes: Routes =[
   {
@@ -44,6 +46,14 @@ const routes: Routes =[
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+      path: 'document',
+      component: DocumentComponent
+      },
+      {
+        path: 'affaire',
+        component: AffaireComponent
       }
     ]},
   {

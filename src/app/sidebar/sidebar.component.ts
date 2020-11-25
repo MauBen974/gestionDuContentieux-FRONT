@@ -23,6 +23,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/tribunal', title: 'Tribunal',  icon:'pe-7s-culture', class: '' },
     { path: '/register', title: 'Inscritpion',  icon:'pe-7s-add-user', class: '' },
     { path: '/login', title: 'Connection',  icon:'pe-7s-door-lock', class: '' },
+    { path: '/document', title: 'Document',  icon:'pe-7s-bell', class: '' },
+    { path: '/affaire', title: 'Affaires',  icon:'pe-7s-bell', class: '' },
 ];
 
 @Component({

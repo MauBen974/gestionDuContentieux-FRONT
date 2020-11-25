@@ -18,6 +18,12 @@ import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
+
+import { DocumentService } from './service/document.service';
+import {AffaireService } from './service/affaire.service';
+import { AffaireComponent } from './affaire/affaire.component';
+import { DocumentComponent } from './document/document.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -36,9 +42,11 @@ import { LoginComponent } from './login/login.component';
     TribunalComponent,
     TacheComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AffaireComponent,
+    DocumentComponent
    ],
-  providers: [],
+  providers: [DocumentService,AffaireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
