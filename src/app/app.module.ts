@@ -27,7 +27,9 @@ import { LoginComponent } from './login/login.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   declarations: [						
     AppComponent,
