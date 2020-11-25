@@ -17,6 +17,8 @@ import { TribunalComponent } from './tribunal/tribunal.component';
 import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { DocumentComponent } from './document/document.component';
+import { AffaireComponent } from './affaire/affaire.component';
 
 @NgModule({
   imports: [
@@ -31,14 +33,16 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule
   ],
-  declarations: [						
+  declarations: [								
     AppComponent,
     AdminLayoutComponent,
     UtilisateurComponent,
     TribunalComponent,
     TacheComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DocumentComponent,
+    AffaireComponent
    ],
   providers: [],
   bootstrap: [AppComponent]
