@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   }, 
   {
@@ -58,7 +58,7 @@ const routes: Routes =[
     ]},
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'login'
   }
 ];
 

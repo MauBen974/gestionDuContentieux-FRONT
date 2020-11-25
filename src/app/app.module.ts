@@ -29,7 +29,9 @@ import { AffaireComponent } from './affaire/affaire.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   declarations: [								
     AppComponent,
