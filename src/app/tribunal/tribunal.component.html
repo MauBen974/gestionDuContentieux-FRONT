@@ -22,7 +22,7 @@
                 <td>{{t.adresse}}</td>
                 <td>{{t.region}}</td>
                 <td>{{t.email}}</td>
-                <td class="col-md-3">{{t.tel}}</td>
+                <td class="col-md-1">0{{t.tel}}</td>
               </tr>
             </tbody>
           </table>
@@ -57,10 +57,10 @@
                 <td>{{t.adresse}}</td>
                 <td>{{t.region}}</td>
                 <td>{{t.email}}</td>
-                <td class="col-md-3">{{t.tel}}</td>
-                <td class="col-md-1">
-                  <button class="btn btn-xs" (click)=getOneTribunal(t.idTribunal)>Modifier</button>
-                  <button class="btn btn-xs" (click)=archiveTribunal(t.idTribunal)>Archiver</button>
+                <td class="col-md-1">0{{t.tel}}</td>
+                <td class="col-md-2">
+                  <button class="btn btn-xs btn-warning" (click)=getOneTribunal(t.idTribunal)>Modifier</button>&nbsp;
+                  <button class="btn btn-xs btn-danger" (click)=archiveTribunal(t.idTribunal)>Archiver</button>
                 </td>
               </tr>
             </tbody>
@@ -89,10 +89,10 @@
                 <td>{{t.adresse}}</td>
                 <td>{{t.region}}</td>
                 <td>{{t.email}}</td>
-                <td class="col-md-3">{{t.tel}}</td>
-                <td class="col-md-1">
-                  <button class="btn btn-xs" (click)=getOneTribunal(t.idTribunal)>Modifier</button>
-                  <button class="btn btn-xs" (click)=deleteTribunal(t.idTribunal)>Supprimer</button>
+                <td class="col-md-1">0{{t.tel}}</td>
+                <td class="col-md-2">
+                  <button class="btn btn-xs btn-warning" (click)=getOneTribunal(t.idTribunal)>Modifier</button>&nbsp;
+                  <button class="btn btn-xs btn-danger" (click)=deleteTribunal(t.idTribunal)>Supprimer</button>
                 </td>
               </tr>
             </tbody>
@@ -105,7 +105,7 @@
           <h4 class="title">GESTION DES TRIBUNAUX</h4>
         </div>
         <div class="content">
-          <form (ngSubmit)="save()">
+          <form (ngSubmit)="save()" *ngIf="affichageTribunalArchive===false">
             <div class="row">
               <div class="col-md">
                 <div class="form-group">
@@ -148,12 +148,55 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-fill" *ngIf="affichageTribunalArchive===false">Sauvegarde</button>
-            <button type="submit" class="btn btn-fill" *ngIf="affichageTribunalArchive===true">Réactiver Tribunal</button>
+            <button type="submit" class="btn btn-fill btn-success">AJOUT</button>
+          </form>
+          <form (ngSubmit)="activeTribunal()" *ngIf="affichageTribunalArchive===true">
+            <div class="row">
+              <div class="col-md">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" placeholder="" [(ngModel)]="tribunal.nomTribunal"
+                    name="nomTribunal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Adresse</label>
+                  <input type="text" class="form-control" placeholder="Adresse" [(ngModel)]="tribunal.adresse"
+                    name="adresse">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Région</label>
+                  <input type="text" class="form-control" placeholder="Haute Garonne" [(ngModel)]="tribunal.region"
+                    name="region">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Mail</label>
+                  <input type="email" class="form-control" placeholder="tribunal____@gmail.com"
+                    [(ngModel)]="tribunal.email" name="email">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" class="form-control" placeholder="0600000000" [(ngModel)]="tribunal.tel"
+                    name="tel">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-fill btn-success">REACTIVER</button>
           </form>
         </div>
       </div>
-
     </div>
   </div>
 </div>
