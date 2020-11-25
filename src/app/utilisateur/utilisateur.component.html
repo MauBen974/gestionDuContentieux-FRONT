@@ -8,19 +8,20 @@
                     </div>
                     <div class="content">
                         <form (ngSubmit)="save()">
+                        <!--<form>-->
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Nom</label>
-                                        <input type="text" class="form-control" placeholder="exemple:Maunier">
-                                        <!-- input type="text" [(ngModel)]="utilisateur.nom" name="nom"-->
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Maunier">-->
+                                        <input type="text" class="form-control" placeholder="exemple:Maunier" [(ngModel)]="utilisateur.nom" name="nom">
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Prenom</label>
-                                        <input type="text" class="form-control" placeholder="exemple:Benjamin">
-                                        <!-- input type="text" [(ngModel)]="utilisateur.prenom" name="prenom"-->
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
+                                         <input type="text" class="form-control" placeholder="exemple:Benjamin" [(ngModel)]="utilisateur.prenom" name="prenom">
                                     </div>
                                 </div>
                             </div>
@@ -28,9 +29,8 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control"
-                                            placeholder="exemple:benjaminmaunier@gmail.com">
-                                        <!-- input type="text" [(ngModel)]="utilisateur.email" name="email"-->
+                                        <!--<input type="email" class="form-control" placeholder="exemple:benjaminmaunier@gmail.com">-->
+                                        <input type="text" class="form-control" placeholder="exemple:benjaminmaunier@gmail.com" [(ngModel)]="utilisateur.email" name="email">
                                     </div>
                                 </div>
                             </div>
@@ -38,29 +38,31 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Mot de Passe</label>
-                                        <input type="password" class="form-control" placeholder="exemple:123456789">
-                                        <!-- input type="text" [(ngModel)]="utilisateur.password" name="password"-->
+                                        <!--<input type="text" class="form-control" placeholder="exemple:123456789">-->
+                                        <input type="text" class="form-control" placeholder="exemple:123456789" [(ngModel)]="utilisateur.password" name="password">
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-info btn-fill pull-right">Sauvegarder</button>
+                            <button class="btn btn-info btn-fill pull-right">Sauvegarder</button>
                             <div class="clearfix"></div>
+                            <!--<button type="button" class="btn btn-info btn-fill pull-right" (click)="save()">Sauvegarder</button>
+                            <div class="clearfix"></div>-->
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class=" row" *ngIf="adminOrnot">
-        <div class=" col-md-12">
-            <div class=" card">
-                <div class=" card-header">
-                    <h4 class=" card-title">Tableau des Utilisateurs</h4>
+    <div class="row" *ngIf="adminOrnot">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Tableau des Utilisateurs</h4>
                 </div>
-                <div class=" card-body">
-                    <div class=" table-responsive">
-                        <table class=" table tablesorter" id="">
-                            <thead class=" text-primary">
+                <div class="content">
+                    <div class="table-responsive">
+                        <table class="table tablesorter" id="">
+                            <thead class="text-primary">
                                 <tr>
                                     <th>Nom</th>
                                     <th>Prenom</th>
@@ -77,18 +79,17 @@
                                     <td>{{u.email}}</td>
                                     <td>{{u.password}}</td>
                                     <td>
-                                        <button class=" btn btn-fill btn-danger"
-                                            (click)="delete(u.idUtilisateur)">Supprimer</button>
+                                        <button class=" btn btn-fill btn-danger" (click)="delete(u)">Supprimer</button>
                                         <button class=" btn btn-fill btn-info" (click)="selectOne(u)">Modifier</button>
                                     </td>
                                     <td>
-                                        <a rel="tooltip" title="Modifier" class="btn btn-success btn-simple btn-xs"
-                                            (click)="delete(u.idUtilisateur)">
+                                        <a rel="tooltip" title="Modification" class="btn btn-success btn-simple btn-xs"
+                                            (click)="selectOne(u)">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs"
-                                            (click)="selectOne(u)">
-                                        <i class="fa fa-times"></i>
+                                        <a rel="tooltip" title="Suppression" class="btn btn-danger btn-simple btn-xs"
+                                            (click)="delete(u.idUtilisateur)">
+                                            <i class="fa fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -99,4 +100,51 @@
             </div>
         </div>
     </div>
+    <!--<div class="row" *ngIf="adminOrnot">-->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Tableau des Utilisateurs</h4>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table class="table tablesorter" id="">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Email</th>
+                                    <th>Mot de Passe</th>
+                                    <th class=" text-center">Action</th>
+                                    <th class=" text-center">ActionBis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let u of utilisateurs">
+                                    <td>{{u.nom}}</td>
+                                    <td>{{u.prenom}}</td>
+                                    <td>{{u.email}}</td>
+                                    <td>{{u.password}}</td>
+                                    <td>
+                                        <button class=" btn btn-fill btn-danger" (click)="delete(u)">Supprimer</button>
+                                        <button class=" btn btn-fill btn-info" (click)="selectOne(u)">Modifier</button>
+                                    </td>
+                                    <td>
+                                        <a rel="tooltip" title="Modification" class="btn btn-success btn-simple btn-xs"
+                                            (click)="selectOne(u)">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a rel="tooltip" title="Suppression" class="btn btn-danger btn-simple btn-xs"
+                                            (click)="delete(u.idUtilisateur)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--</div>-->
 </div>

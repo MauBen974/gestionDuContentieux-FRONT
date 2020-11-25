@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   email:string;
   password:string;
-  utilisateur: Utilisateur = new Utilisateur;
+  utilisateur: Utilisateur = new Utilisateur();
 
   constructor(
     private utilisateurService : UtilisateurService,
@@ -23,13 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   authentification() {
-    this.utilisateurService.authentification(this.email, this.password).subscribe(data =>{
+    this.utilisateurService.authentification(this.utilisateur.email, this.utilisateur.password).subscribe(data =>{
       this.utilisateur=data;
+      console.log("les données:"+this.utilisateur);
       if (this.utilisateur != null) {
         localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
-        localStorage.setItem('id', this.utilisateur.idUtilisateur.toString()); 
+        localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
+        this.router.navigate(['dashboard']);
       }
-      this.router.navigate(['dashboard']);
+      else {
+        this.router.navigate(['login']);
+      }
     })
   }
   /*

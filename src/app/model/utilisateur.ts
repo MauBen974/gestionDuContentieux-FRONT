@@ -1,9 +1,9 @@
 export class Utilisateur {
     idUtilisateur:number;
-    nom:String;
-    prenom:String;
-    email:String;
-    password:String;
-    role:String;
+    nom:string;
+    prenom:string;
+    email:string;
+    password:string;
+    role:string;
     archive:boolean;
 }

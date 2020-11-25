@@ -16,6 +16,7 @@ export class UtilisateurComponent implements OnInit {
   constructor(private utilisateurService : UtilisateurService) { }
 
   ngOnInit() {
+    /*
     this.utilisateurService.findById(parseInt(localStorage.getItem('id'))).subscribe(data => {
       this.utilisateur = data;
       if (this.utilisateur.role=="admin") {
@@ -25,7 +26,8 @@ export class UtilisateurComponent implements OnInit {
         this.adminOrnot=false;
       }
     })
-    this.findAll;
+    */
+    this.findAll();
   }
 
   //FIND ALL
