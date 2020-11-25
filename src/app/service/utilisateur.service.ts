@@ -37,12 +37,12 @@ export class UtilisateurService {
   }
 
   //DELETE
-  public delete(id: number): Observable<any> {
+  public delete(id:number):Observable<any> {
     return this.httpClient.delete(this.baseURL+"utilisateurs/"+id);
   }
 
   //Authentification
-  public authentification(email: string, pwd: string): any {
+  public authentification(email:string,pwd:string):any {
     return this.httpClient.get(this.baseURL+"authentification?email="+email+"&&pwd="+pwd);
   }
 
