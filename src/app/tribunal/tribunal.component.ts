@@ -37,8 +37,6 @@ export class TribunalComponent implements OnInit {
     this.utilisateurService.findById(parseInt(localStorage.getItem('id'))).subscribe(data => {
       this.utilisateur = data;
     });
-
-    console.log(this.utilisateur.role)
   }
 
   findAllTribunalNotArchive() {
