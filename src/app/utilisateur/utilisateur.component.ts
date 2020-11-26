@@ -13,6 +13,9 @@ export class UtilisateurComponent implements OnInit {
   utilisateurs:Utilisateur[];
   adminOrnot:boolean;
 
+  selectedFiles: FileList;
+  currentFileUpload: File;
+
   constructor(private utilisateurService : UtilisateurService) { }
 
   ngOnInit() {
@@ -73,10 +76,24 @@ export class UtilisateurComponent implements OnInit {
     this.findAll();
   }
 
+  //IMAGE
+  selectFile(event){
+    this.selectedFiles = event.target.files;
+  }
+
+  saveUserImage(){
+    this.currentFileUpload = this.selectedFiles.item(0);
+    this.utilisateurService.saveImage(this.currentFileUpload, this.utilisateur).subscribe(()=> {
+      this.findAll();
+      this.utilisateur = new Utilisateur();
+      this.selectedFiles = undefined;
+      }
+    )
+  }
+
   //DELETE
   delete(utilisateur) {
     this.utilisateurService.delete(utilisateur.idUtilisateur).subscribe(()=>this.findAll);
     this.findAll();
   }
-
 }

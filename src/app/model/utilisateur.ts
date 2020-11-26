@@ -5,5 +5,6 @@ export class Utilisateur {
     email:string;
     password:string;
     role:string;
+    file: File;
     archive:boolean;
 }

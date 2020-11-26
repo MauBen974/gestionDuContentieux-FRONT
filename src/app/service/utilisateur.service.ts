@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Utilisateur } from './../model/utilisateur';
-import { HttpHeaders, HttpClient} from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -31,6 +31,18 @@ export class UtilisateurService {
   //SAVE
   public save(utilisateur:any):Observable<any>{
     return this.httpClient.post(this.baseURL+"utilisateurs",utilisateur);
+  }
+  public saveImage(file: File, user: any){
+    const formData: FormData = new FormData();
+    formData.append('nom', user.nom);
+    formData.append('prenom', user.prenom);
+    formData.append('email', user.email);
+    formData.append('password', user.password);
+    formData.append('role', user.role);
+    formData.append('file', user.file);
+    const req = new HttpRequest('POST', this.baseURL+"utilisateurs-image", formData,
+     {reportProgress:true, responseType:'text'});
+    return this.httpClient.request(req);
   }
   public archiveUtilisateur(id:number):Observable<any>{
     return this.httpClient.post(this.baseURL+"utilisateurs/"+id,id);
