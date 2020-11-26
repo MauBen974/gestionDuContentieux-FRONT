@@ -17,6 +17,7 @@ export class TacheComponent implements OnInit {
   statusAudience : Boolean;
   idTribunal: number;
 
+  tacheStored : Tache;
   taches: Tache[];
   tache: Tache = new Tache();
   phases: Phase[];
@@ -26,53 +27,58 @@ export class TacheComponent implements OnInit {
 
   ngOnInit() {
     // this.findByIdUtilisateur();
-    this.findAllTache();
+    this.findAllPhase();
   }
 
-  // findByIdUtilisateur(){
-  //   this.tacheService.findByIdUtilisateur(idARECUP).subscribe();
-  // }
+  findByIdUtilisateur(){
+    this.tacheService.findByIdUtilisateur(parseInt(localStorage.getItem('id'))).subscribe();
+  }
 
   findAllTache() {
-    this.tacheService.getAll().subscribe();
+    this.tacheService.getAll().subscribe(data => { this.taches= data});
   }
 
   findAllPhase() {
-    this.phaseService.getAll().subscribe();
+    this.phaseService.getAll().subscribe(data => { this.phases= data});
   }
 
   deleteTache(tache) {
-    this.tacheService.delete(tache.id).subscribe(() => { this.findAllTache() });
+    this.tacheService.delete(tache.id).subscribe(() => { this.findByIdUtilisateur() });
   }
 
   deletePhase(phase) {
-    this.phaseService.delete(phase.id).subscribe(() => { this.findAllPhase() });
+    this.phaseService.delete(phase.id).subscribe(() => { this.findByIdUtilisateur() });
   }
 
   saveTache() {
     this.tacheService.save(this.tache).subscribe(() => {
-      this.findAllTache();
       this.tache = new Tache();
+      localStorage.setItem('tacheStored', JSON.stringify(this.tacheStored));
+      this.tacheStored = this.tache;
+      this.findAllTache();
     }
     )
   }
   savePhase() {
     this.phaseService.save(this.phase).subscribe(() => {
-      this.findAllTache();
       this.phase = new Phase();
+      this.phase.tache = JSON.parse(localStorage.getItem('tacheStored'));
+      this.findAllTache();
+      localStorage.removeItem('tacheStored');
+      
     }
     )
   }
 
   updateTache(){
     this.tacheService.update(this.idTache, this.tache).subscribe(()=>{
-      this.findAllTache();
+      this.findByIdUtilisateur();
     })
   }
 
   updateLibelle(){
     this.phaseService.updateLibelle(this.idPhase, this.phase).subscribe(()=>{
-      this.findAllTache();
+      this.findByIdUtilisateur();
     })
   }
 
