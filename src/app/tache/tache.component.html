@@ -17,6 +17,7 @@
                   <th>descriptionTache</th>
                   <th>statusAudience</th>
                   <th>phase</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,6 +28,8 @@
                   <td>{{p.tache.descriptionTache}}</td>
                   <td>{{p.tache.statusAudience}}</td>
                   <td>{{p.libellePhase}}</td>
+                  <td><!-- <button class="btn btn-xs btn-warning" (click)=findTandPById(p)>Modifier</button>&nbsp; -->
+                  <button class="btn btn-xs btn-danger" (click)=deleteTandP(p)>Supprimer</button></td>
                 </tr>
 
               </tbody>

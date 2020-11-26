@@ -69,6 +69,24 @@ export class TacheComponent implements OnInit {
     this.phase = new Phase();
   }
 
+  deleteTandP(p: Phase){
+    this.tacheService.delete(p.tache.idTache).subscribe(() => {
+    })
+    this.phaseService.delete(p.idPhase).subscribe(() => {
+      this.findAllPhase();
+    })
+  }
+
+  findTandPById(p: Phase){
+    this.tacheService.findOne(p.tache.idTache).subscribe(t1 => {
+      this.tache = t1;
+    })
+    this.phaseService.findOne(p.idPhase).subscribe(p1 => {
+      this.phase = p1;
+      this.libellePhase = this.phase.libellePhase;
+    })
+  }
+
   saveTache() {
     this.tacheService.save(this.tache).subscribe(() => {
       this.tacheStored = this.tache;
@@ -79,7 +97,7 @@ export class TacheComponent implements OnInit {
     }
     )
   }
-  
+
   savePhase() {
     console.log(this.tacheStored)
     this.phase.tache = JSON.parse(localStorage.getItem('tacheStored'));
