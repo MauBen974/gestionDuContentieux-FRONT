@@ -25,14 +25,15 @@ export class LoginComponent implements OnInit {
   authentification() {
     this.utilisateurService.authentification(this.utilisateur.email, this.utilisateur.password).subscribe(data =>{
       this.utilisateur=data;
-      console.log("les données:"+this.utilisateur);
+      //console.log("les données:"+this.utilisateur);
       if (this.utilisateur != null) {
         localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
         localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
-        this.router.navigate(['utilisateur']);
+        this.router.navigate(['dashboard']).then(()=>{window.location.reload()});
       }
       else {
-        this.router.navigate(['login']);
+        this.router.navigate(['login']).then(()=>{window.location.reload()});
+        location.reload();
       }
     })
   }
