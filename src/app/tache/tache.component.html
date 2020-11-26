@@ -43,7 +43,7 @@
         <h4 class="title">Ajouter une tache</h4>
       </div>
       <div class="content">
-        <form (ngSubmit)="saveTache()" (ngSubmit)="savePhase()">
+        <form (ngSubmit)="saveTAndP()">
           <div class="row">
             <div class="col-md">
               <div class="form-group">
@@ -58,28 +58,26 @@
               <div class="form-group">
                 <label>Statut Audience</label>
                 <div class="radio">
-                  <input type="radio" name="tache.statusAudience" id="true" [(ngModel)]="tache.statusAudience" value="true">
+                  <input type="radio" name="tache.statusAudience" id="true" [(ngModel)]="tache.statusAudience"
+                    value="true">
                   <label for="true">
-                      Ouvert
+                    Ouvert
                   </label>
                 </div>
-                
+
                 <div class="radio">
-                  <input type="radio" name="tache.statusAudience" id="false" [(ngModel)]="tache.statusAudience" value="false">
+                  <input type="radio" name="tache.statusAudience" id="false" [(ngModel)]="tache.statusAudience"
+                    value="false">
                   <label for="false">
-                      Fermer
-                    </label>
+                    Fermer
+                  </label>
                 </div>
-              
               </div>
             </div>
-
             <div class="col-md-8">
-              <div class="form-group">
-                <label>Phase</label>
-                <input type="text" class="form-control" placeholder="En cours" [(ngModel)]="phase.libellePhase"
-                  name="libellePhase">
-              </div>
+              <label>Phase</label>
+              <input type="text" class="form-control" placeholder="En cours" [(ngModel)]="libellePhase"
+                name="libellePhase">
             </div>
           </div>
           <div class="row">

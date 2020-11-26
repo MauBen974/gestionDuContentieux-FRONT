@@ -3,6 +3,7 @@ import { Phase } from 'app/model/phase';
 import { Tache } from 'app/model/tache';
 import { PhaseService } from 'app/service/phase.service';
 import { TacheService } from 'app/service/tache.service';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-tache',
@@ -13,11 +14,11 @@ export class TacheComponent implements OnInit {
 
   idTache: number;
   idPhase: number;
-  libellePhase : String;
-  statusAudience : Boolean;
+  libellePhase: String;
+  statusAudience: Boolean;
   idTribunal: number;
 
-  tacheStored : Tache;
+  tacheStored: Tache;
   taches: Tache[];
   tache: Tache = new Tache();
   phases: Phase[];
@@ -30,16 +31,16 @@ export class TacheComponent implements OnInit {
     this.findAllPhase();
   }
 
-  findByIdUtilisateur(){
+  findByIdUtilisateur() {
     this.tacheService.findByIdUtilisateur(parseInt(localStorage.getItem('id'))).subscribe();
   }
 
   findAllTache() {
-    this.tacheService.getAll().subscribe(data => { this.taches= data});
+    this.tacheService.getAll().subscribe(data => { this.taches = data });
   }
 
   findAllPhase() {
-    this.phaseService.getAll().subscribe(data => { this.phases= data});
+    this.phaseService.getAll().subscribe(data => { this.phases = data });
   }
 
   deleteTache(tache) {
@@ -50,55 +51,76 @@ export class TacheComponent implements OnInit {
     this.phaseService.delete(phase.id).subscribe(() => { this.findByIdUtilisateur() });
   }
 
+  saveTAndP(){
+    this.tacheService.save(this.tache).subscribe(t =>{
+      console.log(t.idTache);
+      this.phase.tache=t;
+      this.phase.libellePhase=this.libellePhase;
+      console.log(this.phase.tache.idTache);
+      console.log(this.phase.libellePhase);
+      this.phaseService.save(this.phase).subscribe(p =>{
+        console.log(p.libellePhase);
+        console.log(p);
+        this.libellePhase=new String();
+        this.findAllPhase();
+      })
+    })
+    this.tache = new Tache();
+    this.phase = new Phase();
+  }
+
   saveTache() {
     this.tacheService.save(this.tache).subscribe(() => {
-      this.tache = new Tache();
-      localStorage.setItem('tacheStored', JSON.stringify(this.tacheStored));
       this.tacheStored = this.tache;
+      localStorage.setItem('tacheStored', JSON.stringify(this.tacheStored));
+      console.log(this.tacheStored)
+      this.tache = new Tache();
       this.findAllTache();
     }
     )
   }
+  
   savePhase() {
+    console.log(this.tacheStored)
+    this.phase.tache = JSON.parse(localStorage.getItem('tacheStored'));
+    console.log(this.phase.tache)
     this.phaseService.save(this.phase).subscribe(() => {
       this.phase = new Phase();
-      this.phase.tache = JSON.parse(localStorage.getItem('tacheStored'));
       this.findAllTache();
       localStorage.removeItem('tacheStored');
-      
     }
     )
   }
 
-  updateTache(){
-    this.tacheService.update(this.idTache, this.tache).subscribe(()=>{
+  updateTache() {
+    this.tacheService.update(this.idTache, this.tache).subscribe(() => {
       this.findByIdUtilisateur();
     })
   }
 
-  updateLibelle(){
-    this.phaseService.updateLibelle(this.idPhase, this.phase).subscribe(()=>{
+  updateLibelle() {
+    this.phaseService.updateLibelle(this.idPhase, this.phase).subscribe(() => {
       this.findByIdUtilisateur();
     })
   }
 
-  findBylibellePhase(){
+  findBylibellePhase() {
     this.tacheService.findBylibellePhase(this.libellePhase).subscribe();
   }
 
-  findByStatusAudience(){
+  findByStatusAudience() {
     this.tacheService.findByStatusAudience(this.statusAudience).subscribe();
   }
 
-  findByIdTribunal(){
+  findByIdTribunal() {
     this.tacheService.findByIdTribunal(this.idTribunal).subscribe();
   }
 
-  getAllNotTermined(){
+  getAllNotTermined() {
     this.phaseService.getAllNotTermined().subscribe();
   }
 
-  findByTache(){
+  findByTache() {
     this.phaseService.findByTache(this.tache).subscribe();
   }
 }
