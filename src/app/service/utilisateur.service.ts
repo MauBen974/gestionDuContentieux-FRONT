@@ -42,8 +42,8 @@ export class UtilisateurService {
   }
 
   //Authentification
-  public authentification(email:string,pwd:string):any {
-    return this.httpClient.get(this.baseURL+"authentification?email="+email+"&&pwd="+pwd);
+  public authentification(email:string,password:string):any {
+    return this.httpClient.get(this.baseURL+"authentification?email="+email+"&&password="+password);
   }
 
 }
