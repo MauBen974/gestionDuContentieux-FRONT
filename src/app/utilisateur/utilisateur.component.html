@@ -9,24 +9,24 @@
                     <div class="content">
                         <form (ngSubmit)="save()">
                             <!--<form>-->
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label>ID</label>
-                                            <!--<input type="text" class="form-control" placeholder="exemple:Maunier">-->
-                                            <input type="text" class="form-control" disabled="true" placeholder="exemple:1"
-                                                [(ngModel)]="utilisateur.idUtilisateur" name="idUtilisateur">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label>Role</label>
-                                            <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
-                                            <input type="text" class="form-control" disabled="true" placeholder="exemple:user"
-                                                [(ngModel)]="utilisateur.role" name="role">
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>ID</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Maunier">-->
+                                        <input type="text" class="form-control" disabled="true" placeholder="exemple:1"
+                                            [(ngModel)]="utilisateur.idUtilisateur" name="idUtilisateur">
                                     </div>
                                 </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
+                                        <input type="text" class="form-control" disabled="true" placeholder="exemple:user"
+                                            [(ngModel)]="utilisateur.role" name="role">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -179,6 +179,7 @@
                                         <a rel="tooltip" title="Modification" class="btn btn-success btn-simple btn-xs"
                                             (click)="selectOne(u)">
                                             <i class="fa fa-edit"></i>
+                                        </a>
                                         <a rel="tooltip" title="Archivage" class="btn btn-warning btn-simple btn-xs"
                                         (click)="archiveUtilisateur(u)">
                                         <i class="fa fa-edit"></i>
@@ -195,5 +196,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </div>
