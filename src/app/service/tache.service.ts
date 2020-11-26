@@ -14,7 +14,7 @@ export class TacheService {
     return this.httpClient.get(this.baseURL);
   }
   public findOne(id: number): Observable<any> {
-    return this.httpClient.get(this.baseURL + "/" + id);
+    return this.httpClient.get(this.baseURL + "ById/" + id);
   }
   public save(tache: any): Observable<any> {
     return this.httpClient.post(this.baseURL, tache);
