@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Phase } from 'app/model/phase';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({

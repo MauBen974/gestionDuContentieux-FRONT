@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
   }
 
   //SAVE
-  save():void{
+  save(){
+    this.utilisateur.role="user";
     this.utilisateurService.save(this.utilisateur).subscribe(u=>{});
     this.router.navigate(['login']);
   }

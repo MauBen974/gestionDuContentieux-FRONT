@@ -1,3 +1,98 @@
-<p>
-  tache works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Table des taches</h4>
+            <!-- <p class="category">Here is a subtitle for this table</p> -->
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>idPhase</th>
+                  <th>dateCreation</th>
+                  <th>titreTache</th>
+                  <th>descriptionTache</th>
+                  <th>statusAudience</th>
+                  <th>phase</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of phases">
+                  <td>{{p.idPhase}}</td>
+                  <td>{{p.tache.dateCreation}}</td>
+                  <td>{{p.tache.titreTache}}</td>
+                  <td>{{p.tache.descriptionTache}}</td>
+                  <td>{{p.tache.statusAudience}}</td>
+                  <td>{{p.libellePhase}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Ajouter une tache</h4>
+      </div>
+      <div class="content">
+        <form (ngSubmit)="saveTAndP()">
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group">
+                <label>Titre</label>
+                <input type="text" class="form-control" placeholder="Titre" [(ngModel)]="tache.titreTache"
+                  name="titreTache">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Statut Audience</label>
+                <div class="radio">
+                  <input type="radio" name="tache.statusAudience" id="true" [(ngModel)]="tache.statusAudience"
+                    value="true">
+                  <label for="true">
+                    Ouvert
+                  </label>
+                </div>
+
+                <div class="radio">
+                  <input type="radio" name="tache.statusAudience" id="false" [(ngModel)]="tache.statusAudience"
+                    value="false">
+                  <label for="false">
+                    Fermer
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <label>Phase</label>
+              <input type="text" class="form-control" placeholder="En cours" [(ngModel)]="libellePhase"
+                name="libellePhase">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="tache.descriptionTache"
+                  name="descriptionTache">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-fill">Sauvegarde</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
