@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DocumentService {
 
-  private baseURL='http://localhost:9096/'
-  private baseURL1='http://localhost:9096/'
+ private baseURL='http://localhost:9090/'
   constructor(private httpClient:HttpClient) { }
 
   public findALL(): Observable<any>{
