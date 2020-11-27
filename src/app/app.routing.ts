@@ -6,8 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
-import { AffaireComponent } from './affaire/affaire.component';
-import { DocumentComponent } from './document/document.component';
 import { TribunalComponent } from './tribunal/tribunal.component';
 import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';

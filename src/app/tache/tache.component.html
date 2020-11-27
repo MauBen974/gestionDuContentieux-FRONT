@@ -12,6 +12,7 @@
                 <tr>
                   <th>N° de tache</th>
                   <th>Date de création</th>
+                  <th>Date de fin</th>
                   <th>Titre</th>
                   <th>Description</th>
                   <th>Status Audience</th>
@@ -23,6 +24,7 @@
                 <tr *ngFor="let p of phases">
                   <td>{{p.tache.idTache}}</td>
                   <td>{{p.tache.dateCreation}}</td>
+                  <td>{{p.dateFin}}</td>
                   <td>{{p.tache.titreTache}}</td>
                   <td>{{p.tache.descriptionTache}}</td>
                   <td>{{p.tache.statusAudience}}</td>

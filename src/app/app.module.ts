@@ -23,8 +23,6 @@ import { AffaireComponent } from './affaire/affaire.component';
 
 import { DocumentService } from './service/document.service';
 import {AffaireService } from './service/affaire.service';
-import { AffaireComponent } from './affaire/affaire.component';
-import { DocumentComponent } from './document/document.component';
 import { EditAffaireComponent } from './affaire/edit-affaire/edit-affaire.component';
 import { EditDocumentComponent } from './document/edit-document/edit-document.component';
 

@@ -44,6 +44,6 @@ export class AffaireComponent implements OnInit {
   }
 
   delete(affaire){
-    this.affaireService.delete(affaire.id).subscribe(()=>{this.findAll()});
+    this.affaireService.delete(affaire.idAffaire).subscribe(()=>{this.findAll()});
   }
 }
