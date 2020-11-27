@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Utilisateur } from 'app/model/utilisateur';
+import { UtilisateurService } from 'app/service/utilisateur.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  email:string;
+  password:string;
+  utilisateur: Utilisateur = new Utilisateur();
+
+  constructor(
+    private utilisateurService : UtilisateurService,
+    private router : Router
+  ) { }
 
   ngOnInit() {
   }
 
+  authentification() {
+    this.utilisateurService.authentification(this.utilisateur.email, this.utilisateur.password).subscribe(data =>{
+      this.utilisateur=data;
+      //console.log("les données:"+this.utilisateur);
+      if (this.utilisateur != null) {
+        localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
+        localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
+        this.router.navigate(['dashboard']).then(()=>{window.location.reload()});
+      }
+      else {
+        this.router.navigate(['login']).then(()=>{window.location.reload()});
+        location.reload();
+      }
+    })
+  }
+  /*
+  authentification() {
+    this.utilisateurService.authentification(this.email, this.password).subscribe(data =>{
+      this.utilisateur=data;
+      if (this.utilisateur != null) {
+        if (this.utilisateur.role == "admin") {
+          //localStorage.setItem('role', 'admin');
+          localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
+          localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
+        } else if(this.utilisateur.role != "admin") {
+          //localStorage.setItem('role', 'user');
+          localStorage.setItem('utilisateur', JSON.stringify({email : this.utilisateur.email, role : this.utilisateur.role}));
+          localStorage.setItem('id', this.utilisateur.idUtilisateur.toString());
+        }
+      }
+      this.router.navigate(['dashboard']);
+    })
+  }
+  */
 }

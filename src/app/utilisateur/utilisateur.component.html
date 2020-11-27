@@ -1,3 +1,130 @@
-<p>
-    Utilisateur works!
-</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Informations Personnelles</h4>
+                    </div>
+                    <div class="content">
+                        <form (ngSubmit)="save()">
+                            <!--<form>-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>ID</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Maunier">-->
+                                        <input type="text" class="form-control" disabled="true" placeholder="exemple:1"
+                                            [(ngModel)]="utilisateur.idUtilisateur" name="idUtilisateur">
+                                    </div>
+                                </div>
+                                <div class="col-md-5" *ngIf="adminOrnot">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
+                                        <input type="text" class="form-control" disabled="true" placeholder="exemple:user"
+                                            [(ngModel)]="utilisateur.role" name="role">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Maunier">-->
+                                        <input type="text" class="form-control" placeholder="exemple:Maunier"
+                                            [(ngModel)]="utilisateur.nom" name="nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Prenom</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
+                                        <input type="text" class="form-control" placeholder="exemple:Benjamin"
+                                            [(ngModel)]="utilisateur.prenom" name="prenom">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <!--<input type="email" class="form-control" placeholder="exemple:benjaminmaunier@gmail.com">-->
+                                        <input type="text" class="form-control"
+                                            placeholder="exemple:benjaminmaunier@gmail.com"
+                                            [(ngModel)]="utilisateur.email" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Mot de Passe</label>
+                                        <!--<input type="text" class="form-control" placeholder="exemple:123456789">-->
+                                        <input type="text" class="form-control" placeholder="exemple:123456789"
+                                            [(ngModel)]="utilisateur.password" name="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <input type="file" class="form-control" name="fileUForm" (change)="selectFile($event)">  
+                                </div>
+                            </div>
+                            </div>  
+                            <button class="btn btn-info btn-fill pull-right">Sauvegarder</button>
+                            <div class="clearfix"></div>
+                            <!--<button type="button" class="btn btn-info btn-fill pull-right" (click)="save()">Sauvegarder</button>
+                            <div class="clearfix"></div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="adminOrnot">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Tableau des Utilisateurs</h4>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table class="table tablesorter" id="">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Email</th>
+                                    <th>Mot de Passe</th>
+                                    <th>Role</th>
+                                    <th>Image</th>
+                                    <th class=" text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let u of utilisateurs">
+                                    <td>{{u.idUtilisateur}}</td>
+                                    <td>{{u.nom}}</td>
+                                    <td>{{u.prenom}}</td>
+                                    <td>{{u.email}}</td>
+                                    <td>{{u.password}}</td>
+                                    <td>{{u.role}}</td>
+                                    <td><img src="data:image/jpeg;base64,{{u.image}}" height="100px" width="100px" ></td>
+                                    <td>
+                                        <button class=" btn btn-fill btn-info" (click)="selectOne(u)">Modifier</button>
+                                        <button class=" btn btn-fill btn-warning" (click)="archiveUtilisateur(u)">Archiver</button>
+                                        <button class=" btn btn-fill btn-danger" (click)="delete(u)">Supprimer</button>      
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

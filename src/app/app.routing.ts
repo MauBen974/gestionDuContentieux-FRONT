@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { AffaireComponent } from './affaire/affaire.component';
+import { DocumentComponent } from './document/document.component';
 import { TribunalComponent } from './tribunal/tribunal.component';
 import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';
@@ -18,7 +20,7 @@ import { EditDocumentComponent } from './document/edit-document/edit-document.co
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   }, 
   {
@@ -34,6 +36,14 @@ const routes: Routes =[
         component: UtilisateurComponent
       },
       {
+        path: 'affaire',
+        component: AffaireComponent
+      },
+      {
+        path: 'document',
+        component: DocumentComponent
+      },
+      {
         path: 'tache',
         component: TacheComponent
       },
@@ -42,8 +52,8 @@ const routes: Routes =[
         component: TribunalComponent
       },
       {
-      path: 'register',
-      component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent
       },
       {
         path: 'login',
@@ -60,6 +70,7 @@ const routes: Routes =[
     ]},
   {
     path: '**',
+
     redirectTo: 'dashboard'
   },
 

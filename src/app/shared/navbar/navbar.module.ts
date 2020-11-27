@@ -9,4 +9,6 @@ import { NavbarComponent } from './navbar.component';
     exports: [ NavbarComponent ]
 })
 
+
 export class NavbarModule {}
+

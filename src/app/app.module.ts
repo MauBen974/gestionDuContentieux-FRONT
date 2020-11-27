@@ -17,6 +17,8 @@ import { TribunalComponent } from './tribunal/tribunal.component';
 import { TacheComponent } from './tache/tache.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { DocumentComponent } from './document/document.component';
+import { AffaireComponent } from './affaire/affaire.component';
 
 
 import { DocumentService } from './service/document.service';
@@ -35,9 +37,11 @@ import { EditDocumentComponent } from './document/edit-document/edit-document.co
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  declarations: [						
+  declarations: [								
     AppComponent,
     AdminLayoutComponent,
     UtilisateurComponent,
@@ -49,6 +53,7 @@ import { EditDocumentComponent } from './document/edit-document/edit-document.co
     DocumentComponent,
     EditAffaireComponent,
     EditDocumentComponent
+
    ],
   providers: [DocumentService,AffaireService,FormBuilder],
   bootstrap: [AppComponent]

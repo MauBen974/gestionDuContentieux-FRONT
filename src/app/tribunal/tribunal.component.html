@@ -1,0 +1,204 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div *ngIf="utilisateur.role !== 'admin'">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">TRIBUNAUX</h4>
+        </div>
+        <div class="content">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Région</th>
+                <th>Mail</th>
+                <th>Téléphone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of tribunals">
+                <td>{{t.nomTribunal}}</td>
+                <td>{{t.adresse}}</td>
+                <td>{{t.region}}</td>
+                <td>{{t.email}}</td>
+                <td class="col-md-1">0{{t.tel}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="utilisateur.role === 'admin'">
+      <nav class="nav">
+        <a class="nav-link"><button class="btn btn-default btn-fill" (click)=desactiveAffichageTribunalArchive()>Tribaux Actifs</button></a>&nbsp;
+        <a class="nav-link"><button class="btn btn-default btn-fill" (click)=findAllArchiveTribunal()>Tribaux Archivés</button></a>
+      </nav>
+      <br>
+      <div class="card" *ngIf="affichageTribunalArchive===false">
+        <div class="header">
+          <h4 class="title">TRIBUNAUX</h4>
+        </div>
+        <div class="content">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th data-sortable="true">Nom</th>
+                <th>Adresse</th>
+                <th>Région</th>
+                <th>Mail</th>
+                <th>Téléphone</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of tribunals">
+                <td>{{t.nomTribunal}}</td>
+                <td>{{t.adresse}}</td>
+                <td>{{t.region}}</td>
+                <td>{{t.email}}</td>
+                <td class="col-md-1">0{{t.tel}}</td>
+                <td class="col-md-2">
+                  <button class="btn btn-xs btn-warning" (click)=getOneTribunal(t.idTribunal)>Modifier</button>&nbsp;
+                  <button class="btn btn-xs btn-danger" (click)=archiveTribunal(t.idTribunal)>Archiver</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" *ngIf="affichageTribunalArchive===true">
+        <div class="header">
+          <h4 class="title">TRIBUNAUX ARCHIVES</h4>
+        </div>
+        <div class="content">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Région</th>
+                <th>Mail</th>
+                <th>Téléphone</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of tribunalsArchive">
+                <td>{{t.nomTribunal}}</td>
+                <td>{{t.adresse}}</td>
+                <td>{{t.region}}</td>
+                <td>{{t.email}}</td>
+                <td class="col-md-1">0{{t.tel}}</td>
+                <td class="col-md-2">
+                  <button class="btn btn-xs btn-warning" (click)=getOneTribunal(t.idTribunal)>Modifier</button>&nbsp;
+                  <button class="btn btn-xs btn-danger" (click)=deleteTribunal(t.idTribunal)>Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- <div class="col-md-8"> -->
+      <div class="card">
+        <div class="header">
+          <h4 class="title">GESTION DES TRIBUNAUX</h4>
+        </div>
+        <div class="content">
+          <form (ngSubmit)="save()" *ngIf="affichageTribunalArchive===false">
+            <div class="row">
+              <div class="col-md">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" placeholder="" [(ngModel)]="tribunal.nomTribunal"
+                    name="nomTribunal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Adresse</label>
+                  <input type="text" class="form-control" placeholder="Adresse" [(ngModel)]="tribunal.adresse"
+                    name="adresse">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Région</label>
+                  <input type="text" class="form-control" placeholder="Haute Garonne" [(ngModel)]="tribunal.region"
+                    name="region">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Mail</label>
+                  <input type="email" class="form-control" placeholder="tribunal____@gmail.com"
+                    [(ngModel)]="tribunal.email" name="email">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="tel" class="form-control" placeholder="0600000000" [(ngModel)]="tribunal.tel"
+                    name="tel">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-fill btn-success">VALIDER</button>
+          </form>
+          <form (ngSubmit)="activeTribunal()" *ngIf="affichageTribunalArchive===true">
+            <div class="row">
+              <div class="col-md">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" class="form-control" placeholder="" [(ngModel)]="tribunal.nomTribunal"
+                    name="nomTribunal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Adresse</label>
+                  <input type="text" class="form-control" placeholder="Adresse" [(ngModel)]="tribunal.adresse"
+                    name="adresse">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Région</label>
+                  <input type="text" class="form-control" placeholder="Haute Garonne" [(ngModel)]="tribunal.region"
+                    name="region">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Mail</label>
+                  <input type="email" class="form-control" placeholder="tribunal____@gmail.com"
+                    [(ngModel)]="tribunal.email" name="email">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="text" class="form-control" placeholder="0600000000" [(ngModel)]="tribunal.tel"
+                    name="tel">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-fill btn-success">REACTIVER</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
