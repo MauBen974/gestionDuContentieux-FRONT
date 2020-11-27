@@ -24,6 +24,9 @@ export class TacheComponent implements OnInit {
   phases: Phase[];
   phase: Phase = new Phase();
 
+  modifLibelle = false;
+  modifTache = false;
+
   constructor(private tacheService: TacheService, private phaseService: PhaseService) { }
 
   ngOnInit() {
@@ -47,21 +50,18 @@ export class TacheComponent implements OnInit {
     this.tacheService.delete(tache.id).subscribe(() => { this.findByIdUtilisateur() });
   }
 
-  deletePhase(phase) {
-    this.phaseService.delete(phase.id).subscribe(() => { this.findByIdUtilisateur() });
-  }
 
-  saveTAndP(){
-    this.tacheService.save(this.tache).subscribe(t =>{
+  saveTAndP() {
+    this.tacheService.save(this.tache).subscribe(t => {
       console.log(t.idTache);
-      this.phase.tache=t;
-      this.phase.libellePhase=this.libellePhase;
+      this.phase.tache = t;
+      this.phase.libellePhase = this.libellePhase;
       console.log(this.phase.tache.idTache);
       console.log(this.phase.libellePhase);
-      this.phaseService.save(this.phase).subscribe(p =>{
+      this.phaseService.save(this.phase).subscribe(p => {
         console.log(p.libellePhase);
         console.log(p);
-        this.libellePhase=new String();
+        this.libellePhase = new String();
         this.findAllPhase();
       })
     })
@@ -69,7 +69,13 @@ export class TacheComponent implements OnInit {
     this.phase = new Phase();
   }
 
-  deleteTandP(p: Phase){
+   deletePhase(p: Phase) {
+    this.phaseService.delete(p.idPhase).subscribe(() => {
+      this.findAllPhase();
+    })
+  }
+
+  deleteTandP(p: Phase) {
     this.tacheService.delete(p.tache.idTache).subscribe(() => {
     })
     this.phaseService.delete(p.idPhase).subscribe(() => {
@@ -77,13 +83,33 @@ export class TacheComponent implements OnInit {
     })
   }
 
-  findTandPById(p: Phase){
-    this.tacheService.findOne(p.tache.idTache).subscribe(t1 => {
-      this.tache = t1;
-    })
+  findOnePhase(p: Phase) {
     this.phaseService.findOne(p.idPhase).subscribe(p1 => {
       this.phase = p1;
-      this.libellePhase = this.phase.libellePhase;
+      this.modifLibelle=true;
+    })
+  }
+
+  updateLibellePhase(p: Phase) {
+    this.phaseService.updateLibelle(p.idPhase, this.phase).subscribe(() => {
+      this.findAllPhase();
+      this.phase = new Phase;
+      this.modifLibelle=false;
+    })
+  }
+
+  findOneTache(t : Tache) {
+    this.tacheService.findOne(t.idTache).subscribe(t1 => {
+      this.tache = t1;
+      this.modifTache=true;
+    })
+  }
+
+  updateTache(t: Tache) {
+    this.tacheService.update(t.idTache, this.tache).subscribe(()=>{
+      this.findAllPhase();
+      this.tache = new Tache();
+      this.modifTache=false;
     })
   }
 
@@ -108,12 +134,6 @@ export class TacheComponent implements OnInit {
       localStorage.removeItem('tacheStored');
     }
     )
-  }
-
-  updateTache() {
-    this.tacheService.update(this.idTache, this.tache).subscribe(() => {
-      this.findByIdUtilisateur();
-    })
   }
 
   updateLibelle() {
