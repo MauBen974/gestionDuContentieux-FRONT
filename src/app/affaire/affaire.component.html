@@ -1,0 +1,157 @@
+<div class="main-content">
+    <div class="container-fluid">
+        
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Repertoire des affaires</h4>
+                </div>
+                    <div class="card-body">
+                    <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                        <tr>
+                            <th>  Reference </th>
+                            <th>  Titre de l'affaire</th>
+                            <th>  Description de l'affaire</th>
+                            <th>  status</th>
+                            <th>  Action</th>
+                             
+                       </tr>
+                        <tr *ngFor="let u of affaires">
+                            <td>{{u.referenceAffaire}}</td>
+                            <td>{{u.titreAffaire}}</td>
+                            <td>{{u.descriptionAffaire}}</td>
+                            <td>{{u.status}}</td>
+                            <td><button  (click)="delete(u)">Delete</button></td>
+                            <nav>
+                                <a routerLink="/editaffaire" routerLinkActive="active">Modifier</a><br>
+                            </nav>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+         </div>
+    
+        
+
+     <div class="col-md-8">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Recherche par status de l'affaire</h4>
+            </div>
+            <form (ngSubmit)="findByStatus(quelstatus)">
+                <label for="sel1">Status de l'affaire :</label>
+                  <select [(ngModel)]="quelstatus" name="quelstatus" class="form-control" id="sel1">
+                    <option>ouvert</option>
+                    <option>en cours</option>
+                    <option>fermé</option>
+                  </select>
+                <button class="btn btn-primary" >Rechercher</button>
+            </form>
+                <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                    <tr>
+                        <th>  Reference </th>
+                        <th>  Titre de l'affaire</th>
+                        <th>  Description de l'affaire</th>
+                        <th>  status</th>
+                        <th>  Action</th>
+                         
+                   </tr>
+                    <tr *ngFor="let u of affairesParStatus">
+                        <td>{{u.referenceAffaire}}</td>
+                        <td>{{u.titreAffaire}}</td>
+                        <td>{{u.descriptionAffaire}}</td>
+                        <td>{{u.status}}</td>
+                        <td><button  (click)="delete(u)">Delete</button></td>
+                        <nav>
+                            <a routerLink="/editaffaire" routerLinkActive="active">Modifier</a><br>
+                        </nav>
+                    </tr>
+                </table>
+        </div>
+     </div>
+
+<div class="col-md-8">
+    <div class="card">
+    <div class="header">
+        <h4 class="title">Ajout d'une nouvelle affaire</h4>
+    </div>
+    <form (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                  <label>Réference de Affaire</label>
+                    <input type="text" [(ngModel)]="affaire.referenceAffaire" name="referenceAffaire" class="form-control" placeholder="Réference de Affaire">
+                </div>
+            </div>
+          </div>
+          
+            <div class="col-md-5">
+                <div class="form-group">
+                  <label>Titre de l'affaire</label>
+                    <input type="text" [(ngModel)]="affaire.titreAffaire" name="titreAffaire" class="form-control" placeholder="Titre de l'affaire">
+                </div>
+            </div>
+         
+          <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                  <label>Description de l'affaire</label>
+                    <input type="text" [(ngModel)]="affaire.descriptionAffaire" name="descriptionAffaire" class="form-control" placeholder="Description de l'affaire">
+                </div>
+            </div>
+          </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                  <label for="sel1">Status de l'affaire :</label>
+                  <select [(ngModel)]="affaire.status" name="status" class="form-control" id="sel1">
+                    <option>ouvert</option>
+                    <option>en cours</option>
+                    <option>fermé</option>
+                  </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                      <label>Nom</label>
+                        <input type="text" [(ngModel)]="document.nom"  name="nom" class="form-control" placeholder="Nom du document">
+                    </div>
+                </div>
+              </div>
+              
+                <div class="col-md-5">
+                    <div class="form-group">
+                      <label>Date de création</label>
+                        <input type="date" [(ngModel)]="document.dateCreation" name="fieldForm" class="form-control" placeholder="Date de création">
+                    </div>
+                </div>
+             
+              <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                      <label>Description</label>
+                        <input type="text" [(ngModel)]="document.description" name="description" class="form-control" placeholder="Description">
+                    </div>
+                </div>
+              </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="sel1">Archive</label>            
+                      <select [(ngModel)]="document.archive" name="archive" class="form-control" id="sel1">
+                        <option>archivé</option>
+                        <option>valide</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="row">
+      <button type="submit" class="btn btn-info btn-fill pull-right">Enregistrer</button>
+        <div class="clearfix"></div>
+                </div>
+    </form>
+
+    </div>
+</div>
+            
+    </div>
+</div>
+
