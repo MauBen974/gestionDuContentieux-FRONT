@@ -18,7 +18,7 @@
                                             [(ngModel)]="utilisateur.idUtilisateur" name="idUtilisateur">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-5" *ngIf="adminOrnot">
                                     <div class="form-group">
                                         <label>Role</label>
                                         <!--<input type="text" class="form-control" placeholder="exemple:Benjamin">-->
@@ -66,19 +66,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" *ngIf="adminOrnot">
+                            <div class="row">
                                 <div class="col-md-5">
-                                    <label>Role</label>
-                                    <input type="text" class="form-control" disabled="true" placeholder="exemple:admin" [(ngModel)]="utilisateur.role" name="role">
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <input type="file" class="form-control" name="fileUForm" (change)="selectFile($event)">  
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control" name="fileUForm" (change)="selectFile($event)">  
-                                    </div>
-                                </div>
                             </div>  
                             <button class="btn btn-info btn-fill pull-right">Sauvegarder</button>
                             <div class="clearfix"></div>
@@ -109,7 +103,6 @@
                                     <th>Role</th>
                                     <th>Image</th>
                                     <th class=" text-center">Action</th>
-                                    <th class=" text-center">ActionBis</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,16 +119,6 @@
                                         <button class=" btn btn-fill btn-warning" (click)="archiveUtilisateur(u)">Archiver</button>
                                         <button class=" btn btn-fill btn-danger" (click)="delete(u)">Supprimer</button>      
                                     </td>
-                                    <td>
-                                        <a rel="tooltip" title="Modification" class="btn btn-success btn-simple btn-xs"
-                                            (click)="selectOne(u)">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a rel="tooltip" title="Suppression" class="btn btn-danger btn-simple btn-xs"
-                                            (click)="delete(u)">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -144,57 +127,4 @@
             </div>
         </div>
     </div>
-    <!--<div class="row" *ngIf="adminOrnot">-->
-        <div class="col-md-12">
-            <div class="card">
-                <div class="header">
-                    <h4 class="title">Tableau des Utilisateurs</h4>
-                </div>
-                <div class="content">
-                    <div class="table-responsive">
-                        <table class="table tablesorter" id="">
-                            <thead class="text-primary">
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Prenom</th>
-                                    <th>Email</th>
-                                    <th>Mot de Passe</th>
-                                    <th>Image</th>
-                                    <th class=" text-center">Action</th>
-                                    <th class=" text-center">ActionBis</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let u of utilisateurs">
-                                    <td>{{u.nom}}</td>
-                                    <td>{{u.prenom}}</td>
-                                    <td>{{u.email}}</td>
-                                    <td>{{u.password}}</td>
-                                    <td><img src="data:image/jpeg;base64,{{u.image}}" height="100px" width="100px" ></td>
-                                    <td>
-                                        <button class=" btn btn-fill btn-danger" (click)="delete(u)">Supprimer</button>
-                                        <button class=" btn btn-fill btn-info" (click)="selectOne(u)">Modifier</button>
-                                    </td>
-                                    <td>
-                                        <a rel="tooltip" title="Modification" class="btn btn-success btn-simple btn-xs"
-                                            (click)="selectOne(u)">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a rel="tooltip" title="Archivage" class="btn btn-warning btn-simple btn-xs"
-                                        (click)="archiveUtilisateur(u)">
-                                        <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a rel="tooltip" title="Suppression" class="btn btn-danger btn-simple btn-xs"
-                                            (click)="delete(u)">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!--</div>-->
 </div>

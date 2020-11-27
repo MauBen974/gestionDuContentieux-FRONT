@@ -32,7 +32,7 @@ export class UtilisateurService {
   public save(utilisateur:any):Observable<any>{
     return this.httpClient.post(this.baseURL+"utilisateurs",utilisateur);
   }
-  public saveImage(file: File, user: any){
+  public saveImage(file: File, user: Utilisateur){
     const formData: FormData = new FormData();
     formData.append('nom', user.nom);
     formData.append('prenom', user.prenom);
