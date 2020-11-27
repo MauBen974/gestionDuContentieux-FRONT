@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AffaireComponent } from './affaire/affaire.component';
 import { DocumentComponent } from './document/document.component';
+import { EditAffaireComponent } from './affaire/edit-affaire/edit-affaire.component';
+import { EditDocumentComponent } from './document/edit-document/edit-document.component';
 
 const routes: Routes =[
   {
@@ -59,6 +61,15 @@ const routes: Routes =[
   {
     path: '**',
     redirectTo: 'dashboard'
+  },
+
+  {
+    path: 'editaffaire',
+    component: EditAffaireComponent
+  },
+  {
+    path: 'editdocument',
+    component: EditDocumentComponent
   }
 ];
 

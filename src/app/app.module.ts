@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -23,6 +23,8 @@ import { DocumentService } from './service/document.service';
 import {AffaireService } from './service/affaire.service';
 import { AffaireComponent } from './affaire/affaire.component';
 import { DocumentComponent } from './document/document.component';
+import { EditAffaireComponent } from './affaire/edit-affaire/edit-affaire.component';
+import { EditDocumentComponent } from './document/edit-document/edit-document.component';
 
 @NgModule({
   imports: [
@@ -44,9 +46,11 @@ import { DocumentComponent } from './document/document.component';
     RegisterComponent,
     LoginComponent,
     AffaireComponent,
-    DocumentComponent
+    DocumentComponent,
+    EditAffaireComponent,
+    EditDocumentComponent
    ],
-  providers: [DocumentService,AffaireService],
+  providers: [DocumentService,AffaireService,FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
