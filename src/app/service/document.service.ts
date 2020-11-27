@@ -11,7 +11,7 @@ export class DocumentService {
   constructor(private httpClient:HttpClient) { }
 
   public findALL(): Observable<any>{
-    return this.httpClient.get(this.baseURL1+"document");
+    return this.httpClient.get(this.baseURL+"document");
    }
    public findOne(id:number): Observable<any>{
    return this.httpClient.get(this.baseURL+"document/"+id);
@@ -25,10 +25,10 @@ export class DocumentService {
    return this.httpClient.get(this.baseURL+"docNonArchive/"+nonArchive);
  }
  public save(document:any): Observable<any>{
-   return this.httpClient.post(this.baseURL1+"document",document);
+   return this.httpClient.post(this.baseURL+"document",document);
  }
  public delete(id:number): Observable<any>{
-   return this.httpClient.delete(this.baseURL1+"document/"+id);
+   return this.httpClient.delete(this.baseURL+"document/"+id);
  }
  public MiseAJour(id:number,document:any): Observable<any>{
    return this.httpClient.put(this.baseURL+"document/"+id,document);
